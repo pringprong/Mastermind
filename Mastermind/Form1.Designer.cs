@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -38,7 +38,7 @@
             this.guessHistoryDGV = new System.Windows.Forms.DataGridView();
             this.submit = new System.Windows.Forms.Button();
             this.newGameButton = new System.Windows.Forms.Button();
-            this.solutionDataGridView = new System.Windows.Forms.DataGridView();
+            this.solutionDGV = new System.Windows.Forms.DataGridView();
             this.showSolutions = new System.Windows.Forms.Button();
             this.cluesDGV = new System.Windows.Forms.DataGridView();
             this.numSpacesLabel = new System.Windows.Forms.Label();
@@ -55,7 +55,7 @@
             this.repeatsAllowedDisplayCheckbox = new System.Windows.Forms.CheckBox();
             this.colorDataGridView = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.guessHistoryDGV)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.solutionDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.solutionDGV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cluesDGV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfSpacesUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfColorsUpDown)).BeginInit();
@@ -68,7 +68,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 621);
+            this.label1.Location = new System.Drawing.Point(12, 750);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(119, 13);
             this.label1.TabIndex = 0;
@@ -77,7 +77,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(135, 621);
+            this.label2.Location = new System.Drawing.Point(135, 750);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 13);
             this.label2.TabIndex = 2;
@@ -86,7 +86,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(189, 621);
+            this.label3.Location = new System.Drawing.Point(189, 750);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(170, 13);
             this.label3.TabIndex = 3;
@@ -95,7 +95,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(370, 621);
+            this.label4.Location = new System.Drawing.Point(370, 750);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 13);
             this.label4.TabIndex = 4;
@@ -107,22 +107,22 @@
             this.guessHistoryDGV.AllowUserToDeleteRows = false;
             this.guessHistoryDGV.AllowUserToResizeColumns = false;
             this.guessHistoryDGV.AllowUserToResizeRows = false;
-            this.guessHistoryDGV.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.guessHistoryDGV.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.guessHistoryDGV.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.guessHistoryDGV.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.guessHistoryDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.guessHistoryDGV.ColumnHeadersVisible = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Transparent;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(3);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.guessHistoryDGV.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(3);
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.guessHistoryDGV.DefaultCellStyle = dataGridViewCellStyle7;
             this.guessHistoryDGV.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.guessHistoryDGV.Location = new System.Drawing.Point(10, 49);
+            this.guessHistoryDGV.Location = new System.Drawing.Point(10, 87);
             this.guessHistoryDGV.MultiSelect = false;
             this.guessHistoryDGV.Name = "guessHistoryDGV";
             this.guessHistoryDGV.RowHeadersVisible = false;
@@ -133,14 +133,14 @@
             this.guessHistoryDGV.ShowCellToolTips = false;
             this.guessHistoryDGV.ShowEditingIcon = false;
             this.guessHistoryDGV.ShowRowErrors = false;
-            this.guessHistoryDGV.Size = new System.Drawing.Size(240, 480);
+            this.guessHistoryDGV.Size = new System.Drawing.Size(291, 536);
             this.guessHistoryDGV.TabIndex = 5;
             this.guessHistoryDGV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.guessHistoryDGV_CellClick);
             this.guessHistoryDGV.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.guessHistoryDGV_CellPainting);
             // 
             // submit
             // 
-            this.submit.Location = new System.Drawing.Point(256, 543);
+            this.submit.Location = new System.Drawing.Point(307, 591);
             this.submit.Name = "submit";
             this.submit.Size = new System.Drawing.Size(54, 23);
             this.submit.TabIndex = 7;
@@ -158,44 +158,47 @@
             this.newGameButton.UseVisualStyleBackColor = true;
             this.newGameButton.Click += new System.EventHandler(this.newGameButton_Click);
             // 
-            // solutionDataGridView
+            // solutionDGV
             // 
-            this.solutionDataGridView.AllowUserToAddRows = false;
-            this.solutionDataGridView.AllowUserToDeleteRows = false;
-            this.solutionDataGridView.AllowUserToResizeColumns = false;
-            this.solutionDataGridView.AllowUserToResizeRows = false;
-            this.solutionDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.solutionDataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
-            this.solutionDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.solutionDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.solutionDataGridView.ColumnHeadersVisible = false;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.solutionDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
-            this.solutionDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.solutionDataGridView.Location = new System.Drawing.Point(10, 5);
-            this.solutionDataGridView.MultiSelect = false;
-            this.solutionDataGridView.Name = "solutionDataGridView";
-            this.solutionDataGridView.RowHeadersVisible = false;
-            this.solutionDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.solutionDataGridView.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.Transparent;
-            this.solutionDataGridView.RowTemplate.ReadOnly = true;
-            this.solutionDataGridView.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.solutionDataGridView.ShowCellErrors = false;
-            this.solutionDataGridView.ShowCellToolTips = false;
-            this.solutionDataGridView.ShowEditingIcon = false;
-            this.solutionDataGridView.ShowRowErrors = false;
-            this.solutionDataGridView.Size = new System.Drawing.Size(240, 40);
-            this.solutionDataGridView.TabIndex = 9;
+            this.solutionDGV.AllowUserToAddRows = false;
+            this.solutionDGV.AllowUserToDeleteRows = false;
+            this.solutionDGV.AllowUserToResizeColumns = false;
+            this.solutionDGV.AllowUserToResizeRows = false;
+            this.solutionDGV.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.solutionDGV.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.solutionDGV.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
+            this.solutionDGV.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.solutionDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.solutionDGV.ColumnHeadersVisible = false;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.solutionDGV.DefaultCellStyle = dataGridViewCellStyle8;
+            this.solutionDGV.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.solutionDGV.Enabled = false;
+            this.solutionDGV.Location = new System.Drawing.Point(10, 8);
+            this.solutionDGV.MultiSelect = false;
+            this.solutionDGV.Name = "solutionDGV";
+            this.solutionDGV.RowHeadersVisible = false;
+            this.solutionDGV.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.solutionDGV.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.Transparent;
+            this.solutionDGV.RowTemplate.ReadOnly = true;
+            this.solutionDGV.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.solutionDGV.ShowCellErrors = false;
+            this.solutionDGV.ShowCellToolTips = false;
+            this.solutionDGV.ShowEditingIcon = false;
+            this.solutionDGV.ShowRowErrors = false;
+            this.solutionDGV.Size = new System.Drawing.Size(291, 67);
+            this.solutionDGV.TabIndex = 9;
+            this.solutionDGV.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.solutionDataGridView_CellPainting);
             // 
             // showSolutions
             // 
-            this.showSolutions.Location = new System.Drawing.Point(316, 543);
+            this.showSolutions.Location = new System.Drawing.Point(411, 745);
             this.showSolutions.Name = "showSolutions";
             this.showSolutions.Size = new System.Drawing.Size(101, 22);
             this.showSolutions.TabIndex = 10;
@@ -209,23 +212,23 @@
             this.cluesDGV.AllowUserToDeleteRows = false;
             this.cluesDGV.AllowUserToResizeColumns = false;
             this.cluesDGV.AllowUserToResizeRows = false;
-            this.cluesDGV.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.cluesDGV.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
+            this.cluesDGV.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.cluesDGV.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
+            this.cluesDGV.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.cluesDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.cluesDGV.ColumnHeadersVisible = false;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(3);
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.cluesDGV.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle9.Padding = new System.Windows.Forms.Padding(3);
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.cluesDGV.DefaultCellStyle = dataGridViewCellStyle9;
             this.cluesDGV.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.cluesDGV.Enabled = false;
-            this.cluesDGV.Location = new System.Drawing.Point(256, 49);
+            this.cluesDGV.Location = new System.Drawing.Point(382, 87);
             this.cluesDGV.MultiSelect = false;
             this.cluesDGV.Name = "cluesDGV";
             this.cluesDGV.RowHeadersVisible = false;
@@ -236,7 +239,7 @@
             this.cluesDGV.ShowCellToolTips = false;
             this.cluesDGV.ShowEditingIcon = false;
             this.cluesDGV.ShowRowErrors = false;
-            this.cluesDGV.Size = new System.Drawing.Size(160, 480);
+            this.cluesDGV.Size = new System.Drawing.Size(160, 536);
             this.cluesDGV.TabIndex = 11;
             // 
             // numSpacesLabel
@@ -354,14 +357,14 @@
             this.panel3.Controls.Add(this.newGameButton);
             this.panel3.Controls.Add(this.repeatsAllowedCheckbox);
             this.panel3.Controls.Add(this.quitButton);
-            this.panel3.Location = new System.Drawing.Point(128, 185);
+            this.panel3.Location = new System.Drawing.Point(128, 223);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(173, 166);
             this.panel3.TabIndex = 13;
             // 
             // checkGuessButton
             // 
-            this.checkGuessButton.Location = new System.Drawing.Point(11, 581);
+            this.checkGuessButton.Location = new System.Drawing.Point(11, 710);
             this.checkGuessButton.Name = "checkGuessButton";
             this.checkGuessButton.Size = new System.Drawing.Size(97, 32);
             this.checkGuessButton.TabIndex = 14;
@@ -372,7 +375,7 @@
             // checkGuessResult
             // 
             this.checkGuessResult.AutoSize = true;
-            this.checkGuessResult.Location = new System.Drawing.Point(125, 591);
+            this.checkGuessResult.Location = new System.Drawing.Point(125, 720);
             this.checkGuessResult.Name = "checkGuessResult";
             this.checkGuessResult.Size = new System.Drawing.Size(37, 13);
             this.checkGuessResult.TabIndex = 15;
@@ -384,7 +387,7 @@
             this.repeatsAllowedDisplayCheckbox.Checked = true;
             this.repeatsAllowedDisplayCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.repeatsAllowedDisplayCheckbox.Enabled = false;
-            this.repeatsAllowedDisplayCheckbox.Location = new System.Drawing.Point(300, 12);
+            this.repeatsAllowedDisplayCheckbox.Location = new System.Drawing.Point(356, 12);
             this.repeatsAllowedDisplayCheckbox.Name = "repeatsAllowedDisplayCheckbox";
             this.repeatsAllowedDisplayCheckbox.Size = new System.Drawing.Size(105, 17);
             this.repeatsAllowedDisplayCheckbox.TabIndex = 16;
@@ -397,9 +400,10 @@
             this.colorDataGridView.AllowUserToDeleteRows = false;
             this.colorDataGridView.AllowUserToResizeColumns = false;
             this.colorDataGridView.AllowUserToResizeRows = false;
+            this.colorDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.colorDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.colorDataGridView.ColumnHeadersVisible = false;
-            this.colorDataGridView.Location = new System.Drawing.Point(8, 536);
+            this.colorDataGridView.Location = new System.Drawing.Point(8, 651);
             this.colorDataGridView.MultiSelect = false;
             this.colorDataGridView.Name = "colorDataGridView";
             this.colorDataGridView.ReadOnly = true;
@@ -409,16 +413,18 @@
             this.colorDataGridView.ShowCellToolTips = false;
             this.colorDataGridView.ShowEditingIcon = false;
             this.colorDataGridView.ShowRowErrors = false;
-            this.colorDataGridView.Size = new System.Drawing.Size(242, 39);
+            this.colorDataGridView.Size = new System.Drawing.Size(487, 53);
             this.colorDataGridView.TabIndex = 17;
             this.colorDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.colorDataGridView_CellClick);
             this.colorDataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.colorDataGridView_CellDoubleClick);
+            this.colorDataGridView.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.colorDataGridView_CellPainting);
             // 
             // MastermindMainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(428, 641);
+            this.BackColor = System.Drawing.Color.Ivory;
+            this.ClientSize = new System.Drawing.Size(628, 811);
             this.Controls.Add(this.colorDataGridView);
             this.Controls.Add(this.repeatsAllowedDisplayCheckbox);
             this.Controls.Add(this.checkGuessResult);
@@ -426,7 +432,7 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.cluesDGV);
             this.Controls.Add(this.showSolutions);
-            this.Controls.Add(this.solutionDataGridView);
+            this.Controls.Add(this.solutionDGV);
             this.Controls.Add(this.submit);
             this.Controls.Add(this.guessHistoryDGV);
             this.Controls.Add(this.label4);
@@ -440,7 +446,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mastermind by Monica";
             ((System.ComponentModel.ISupportInitialize)(this.guessHistoryDGV)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.solutionDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.solutionDGV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cluesDGV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfSpacesUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfColorsUpDown)).EndInit();
@@ -465,7 +471,7 @@
         private System.Windows.Forms.DataGridView guessHistoryDGV;
         private System.Windows.Forms.Button submit;
         private System.Windows.Forms.Button newGameButton;
-        private System.Windows.Forms.DataGridView solutionDataGridView;
+        private System.Windows.Forms.DataGridView solutionDGV;
         private System.Windows.Forms.Button showSolutions;
         private System.Windows.Forms.DataGridView cluesDGV;
         private System.Windows.Forms.Panel panel1;
