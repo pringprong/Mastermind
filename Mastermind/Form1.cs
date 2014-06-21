@@ -31,8 +31,8 @@ namespace Mastermind
         private Guess solution;
         private Random rnd;
         private Guess currentGuess;
-        private System.Drawing.Color rightColorRightPlaceMarker = System.Drawing.Color.Black;
-        private System.Drawing.Color rightColorWrongPlaceMarker = System.Drawing.Color.LightGray;
+        private System.Drawing.Color rightColorRightPlaceMarker = System.Drawing.Color.DarkGray;
+        private System.Drawing.Color rightColorWrongPlaceMarker = System.Drawing.Color.White;
         private List<Guess> guessHistory;
         private System.Drawing.Color[] colorArray;
         private System.Drawing.Color[] guessInProgress;
@@ -107,6 +107,7 @@ namespace Mastermind
             solutionDGV.Hide();
             colorDataGridView.Hide();
             guessHistoryDGV.Hide();
+            cluesDGV.Hide();
 
             guessHistoryDGV.RowCount = numberOfAllowedGuesses;
             guessHistoryDGV.ColumnCount = numberOfSpaces;
@@ -134,7 +135,6 @@ namespace Mastermind
             {
                 r.Height = cluesDGV.Height / cluesDGV.RowCount;
             }
-            cluesDGV.Show();
 
             solutionDGV.RowCount = 1;
             solutionDGV.ColumnCount = numberOfSpaces;
@@ -210,6 +210,7 @@ namespace Mastermind
             panel3.Hide();
             checkGuessButton.Show();
             checkGuessResult.Show();
+            cluesDGV.Show();
             guessHistoryDGV.Show();
             colorDataGridView.Show();
             selectCell(0, numberOfAllowedGuesses - 1);
@@ -277,23 +278,20 @@ namespace Mastermind
             int[] guessResult = solution.compare(currentGuess);
             int rightColorRightPlace = guessResult[0];
             int rightColorWrongPlace = guessResult[1];
+            
             int j = 0;
             for (int k = 0; k < rightColorRightPlace; k++)
             {
-                cluesDGV[j, guessHistoryRowNumber].Style.BackColor = rightColorRightPlaceMarker;
-                cluesDGV[j, guessHistoryRowNumber].Style.SelectionBackColor = rightColorRightPlaceMarker;
                 j++;
             }
             for (int k = 0; k < rightColorWrongPlace; k++)
             {
-                cluesDGV[j, guessHistoryRowNumber].Style.BackColor = rightColorWrongPlaceMarker;
-                cluesDGV[j, guessHistoryRowNumber].Style.SelectionBackColor = rightColorWrongPlaceMarker;
                 j++;
             }
             currentGuess.setRightColorRightPlace(rightColorRightPlace);
             currentGuess.setRightColorWrongPlace(rightColorWrongPlace);
-            
-                // update possibleSolutions
+ 
+            // update possibleSolutions
             guessHistory.Add(currentGuess);
             List<Guess> toRemove = new List<Guess>();
             int[] results;
@@ -316,6 +314,7 @@ namespace Mastermind
             {
                 revealSolution = true;
                 solutionDGV.Invalidate();
+                cluesDGV.Invalidate();
                 submit.Enabled = false;
                 if (rightColorRightPlace != numberOfSpaces)
                 {
@@ -332,6 +331,8 @@ namespace Mastermind
                 numberOfGuesses++;
                 selectCell(0, numberOfAllowedGuesses - numberOfGuesses - 1);
             }
+            cluesDGV.Invalidate();
+
         }
 
         private void showSolutions_Click(object sender, EventArgs e)
@@ -371,7 +372,6 @@ namespace Mastermind
         private void checkGuessButton_Click(object sender, EventArgs e)
         {
             Guess thisGuess = new Guess(numberOfSpaces);
-
             // check for empty cells
             for (int i = 0; i < numberOfSpaces; i++)
             {
@@ -625,8 +625,6 @@ namespace Mastermind
             //  hilite ellipse = based on http://www3.telus.net/ryanfransen/article_glassspheres.html
             int r3w = Convert.ToInt16(spotRectangle.Width);
             int r3h = Convert.ToInt16(spotRectangle.Height * 0.4);
-            int r3posX = (spotRectangle.Width / 2) - (r3w / 2);
-            int r3posY = spotRectangle.Top + 1;
             Rectangle r3 = new Rectangle(
                 new Point(spotRectangle.Location.X , spotRectangle.Location.Y + 1),
                 new Size(r3w, r3h));
@@ -640,6 +638,95 @@ namespace Mastermind
             br.Dispose();
             normalPen.Dispose();
             normalPenBrush.Dispose();
+        }
+
+        // based on http://stackoverflow.com/questions/13537679/drawing-a-triangle-in-gdi-given-a-rectangle
+        private Point[] DrawTriangle(Rectangle rect, String direction)
+        {
+            int halfWidth = rect.Width / 2;
+            int halfHeight = rect.Height / 2;
+            Point p0 = Point.Empty;
+            Point p1 = Point.Empty;
+            Point p2 = Point.Empty;
+            switch (direction)
+            {
+                case "up":
+                    p0 = new Point(rect.Left + halfWidth, rect.Top);
+                    p1 = new Point(rect.Left, rect.Bottom);
+                    p2 = new Point(rect.Right, rect.Bottom);
+                    break;
+                case "down":
+                    p0 = new Point(rect.Left + halfWidth, rect.Bottom);
+                    p1 = new Point(rect.Left, rect.Top);
+                    p2 = new Point(rect.Right, rect.Top);
+                    break;
+                case "left":
+                    p0 = new Point(rect.Left, rect.Top + halfHeight);
+                    p1 = new Point(rect.Right, rect.Top);
+                    p2 = new Point(rect.Right, rect.Bottom);
+                    break;
+                case "right":
+                    p0 = new Point(rect.Right, rect.Top + halfHeight);
+                    p1 = new Point(rect.Left, rect.Bottom);
+                    p2 = new Point(rect.Left, rect.Top);
+                    break;
+            }
+            return new Point[] { p0, p1, p2 };
+        }
+
+        private void cluesDGV_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.RowIndex > numberOfAllowedGuesses - 1 - guessHistory.Count && guessHistory.Count>0)
+            {
+                int guessHistoryIndex = numberOfAllowedGuesses - e.RowIndex -1 ;
+                Guess guessAtRow = guessHistory.ElementAt(guessHistoryIndex);
+                int rightColorRightPlace = guessAtRow.getRightColorRightPlace();
+                int rightColorWrongPlace = guessAtRow.getRightColorWrongPlace();
+                Color c = backgroundColor;
+                String direction = "";
+                if (e.ColumnIndex < rightColorRightPlace)
+                {
+                    c = rightColorRightPlaceMarker;
+                    direction = "up";
+                }
+                else if (numberOfSpaces - e.ColumnIndex <= rightColorWrongPlace)
+                {
+                    c = rightColorWrongPlaceMarker;
+                    direction = "down";
+                }
+                else
+                {
+                    e.Handled = true;
+                    return;
+                }
+
+                e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+
+                int rectangleLocationX = e.CellBounds.X + 3;
+                int rectangleLocationY = e.CellBounds.Y + 3;
+                int rectangleWidth = e.CellBounds.Width - 6;
+                int rectangleHeight = e.CellBounds.Height - 6;
+                System.Drawing.Rectangle spotRectangle = new System.Drawing.Rectangle(rectangleLocationX, rectangleLocationY, rectangleWidth, rectangleHeight);
+                System.Drawing.Rectangle gradientBigRectangle = new System.Drawing.Rectangle(rectangleLocationX, rectangleLocationY, rectangleWidth, rectangleHeight * 3);
+                System.Drawing.Rectangle gradientBiggerRectangle = new System.Drawing.Rectangle(rectangleLocationX - 10, rectangleLocationY - 10, rectangleWidth + 20, rectangleHeight * 3);
+                float filledSpotGradientAngle = (float)220.0;
+                float emptySpotGradientAngle = (float)70.0;
+                System.Drawing.Drawing2D.LinearGradientBrush normalPenBrush = new LinearGradientBrush(gradientBiggerRectangle, Color.LightGray, Color.Black, emptySpotGradientAngle, false);
+                System.Drawing.Pen normalPen = new System.Drawing.Pen(normalPenBrush, 1.0f);
+
+                System.Drawing.Drawing2D.LinearGradientBrush br;
+                br = new System.Drawing.Drawing2D.LinearGradientBrush(gradientBigRectangle, Color.Black, c, filledSpotGradientAngle, false);
+
+                Point[] triangle = DrawTriangle(spotRectangle, direction);
+                e.Graphics.FillPolygon(br, triangle);
+                e.Graphics.DrawPolygon(normalPen, triangle);
+                e.PaintContent(e.ClipBounds);
+                e.Handled = true;
+                normalPen.Dispose();
+                br.Dispose();
+
+            }
         }
     }
 
