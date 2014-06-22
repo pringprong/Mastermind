@@ -5,7 +5,6 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-//using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 
@@ -31,12 +30,13 @@ namespace Mastermind
         private Guess solution;
         private Random rnd;
         private Guess currentGuess;
-        private System.Drawing.Color rightColorRightPlaceMarker = System.Drawing.Color.DarkGray;
+        private System.Drawing.Color rightColorRightPlaceMarker = System.Drawing.Color.Black;
         private System.Drawing.Color rightColorWrongPlaceMarker = System.Drawing.Color.White;
         private List<Guess> guessHistory;
         private System.Drawing.Color[] colorArray;
         private System.Drawing.Color[] guessInProgress;
         private bool revealSolution = false;
+        private int rowHeight = 0;
 
         public MastermindMainWindow()
         {
@@ -119,6 +119,7 @@ namespace Mastermind
             {
                 r.Height = guessHistoryDGV.Height / guessHistoryDGV.RowCount;
             }
+            rowHeight = guessHistoryDGV.Height / guessHistoryDGV.RowCount;
 
             cluesDGV.RowCount = numberOfAllowedGuesses;
             cluesDGV.ColumnCount = numberOfSpaces;
@@ -203,6 +204,7 @@ namespace Mastermind
             // show and hide the appropriate items
             label4.Text = label2.Text; 
             submit.Enabled = true;
+            submit.Location = new Point(submit.Location.X, cluesDGV.Location.Y + cluesDGV.Height - rowHeight);
             submit.Show();
             solutionDGV.Show();
             showSolutions.Show();
@@ -265,6 +267,8 @@ namespace Mastermind
         private void submitGuess()
         {
             checkGuessResult.Text = "";
+            submit.Hide();
+            cluesDGV.Invalidate();
             // initialize currentGuess
             int guessHistoryRowNumber = numberOfAllowedGuesses - 1 - numberOfGuesses;
             currentGuess = new Guess(numberOfSpaces);
@@ -325,11 +329,14 @@ namespace Mastermind
                     MessageBox.Show("You win!");
                 }
                 panel3.Show();
+                //submit.Hide();
             }
             else
             {
                 numberOfGuesses++;
                 selectCell(0, numberOfAllowedGuesses - numberOfGuesses - 1);
+                submit.Location = new Point(submit.Location.X, submit.Location.Y - rowHeight);
+                submit.Show();
             }
             cluesDGV.Invalidate();
 
@@ -417,7 +424,7 @@ namespace Mastermind
                 }
                 else if (results[1] != g.getRightColorWrongPlace())
                 {
-                    checkGuessResult.Text = "No match: Right Color Wrong Place, guess number " + m + ".";
+                    checkGuessResult.Text = "No match: Right Color Wrong Place, guess " + m + ".";
                     return;
                 }
                 m++;
@@ -674,9 +681,46 @@ namespace Mastermind
             return new Point[] { p0, p1, p2 };
         }
 
+        private Point[][] DrawPyramid(Rectangle rect, String direction)
+        {
+            int halfWidth = rect.Width / 2;
+            int halfHeight = rect.Height / 2;
+            Point midpoint = new Point(rect.Left + halfWidth, rect.Top + halfHeight);
+            Point top = new Point(rect.Left + halfWidth, rect.Top);
+            Point bottomLeft = new Point(rect.Left, rect.Bottom);
+            Point bottomRight = new Point(rect.Right, rect.Bottom);
+            Point bottom = new Point(rect.Left + halfWidth, rect.Bottom);
+            Point topLeft = new Point(rect.Left, rect.Top);
+            Point topRight = new Point(rect.Right, rect.Top);
+            Point left = new Point(rect.Left, rect.Top + halfHeight);
+            Point right = new Point(rect.Right, rect.Top + halfHeight);
+
+            switch (direction)
+            {
+                case "up":
+                    return new Point[][] { new Point[] { top, midpoint, bottomLeft }, new Point[] { top, midpoint, bottomRight }, new Point[] { bottomLeft, midpoint, bottomRight } };
+                case "down":
+                    return new Point[][] { new Point[] { bottom, midpoint, topLeft }, new Point[] { bottom, midpoint, topRight }, new Point[] { topLeft, midpoint, topRight } };
+                case "left":
+                    return new Point[][] { new Point[] { left, midpoint, topRight }, new Point[] { left, midpoint, bottomRight }, new Point[] { topRight, midpoint, bottomRight } };
+                case "right":
+                    return new Point[][] { new Point[] { topLeft, midpoint, right }, new Point[] { bottomLeft, midpoint, right }, new Point[] { topLeft, midpoint, bottomLeft } };
+            }
+            return null; 
+        }
+
         private void cluesDGV_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            if (e.RowIndex > numberOfAllowedGuesses - 1 - guessHistory.Count && guessHistory.Count>0)
+            // first paint over the submit button
+            if (e.RowIndex <= numberOfAllowedGuesses -1 - guessHistory.Count)
+             {
+                 Brush bg = new SolidBrush(backgroundColor);
+                 e.Graphics.FillRectangle(bg, e.ClipBounds);
+                 bg.Dispose();
+                 e.PaintContent(e.ClipBounds);
+                 e.Handled = true;
+             }
+            else if (e.RowIndex > numberOfAllowedGuesses - 1 - guessHistory.Count && guessHistory.Count>0)
             {
                 int guessHistoryIndex = numberOfAllowedGuesses - e.RowIndex -1 ;
                 Guess guessAtRow = guessHistory.ElementAt(guessHistoryIndex);
@@ -705,21 +749,29 @@ namespace Mastermind
 
                 int rectangleLocationX = e.CellBounds.X + 3;
                 int rectangleLocationY = e.CellBounds.Y + 3;
-                int rectangleWidth = e.CellBounds.Width - 6;
-                int rectangleHeight = e.CellBounds.Height - 6;
+                int rectangleWidth = Math.Min(e.CellBounds.Height, e.CellBounds.Width) - 10;
+                int rectangleHeight = rectangleWidth;
                 System.Drawing.Rectangle spotRectangle = new System.Drawing.Rectangle(rectangleLocationX, rectangleLocationY, rectangleWidth, rectangleHeight);
                 System.Drawing.Rectangle gradientBigRectangle = new System.Drawing.Rectangle(rectangleLocationX, rectangleLocationY, rectangleWidth, rectangleHeight * 3);
                 System.Drawing.Rectangle gradientBiggerRectangle = new System.Drawing.Rectangle(rectangleLocationX - 10, rectangleLocationY - 10, rectangleWidth + 20, rectangleHeight * 3);
                 float filledSpotGradientAngle = (float)220.0;
-                float emptySpotGradientAngle = (float)70.0;
+                float emptySpotGradientAngle = (float)180.0;
+                float anotherGradientAngle = (float)90.0;
                 System.Drawing.Drawing2D.LinearGradientBrush normalPenBrush = new LinearGradientBrush(gradientBiggerRectangle, Color.LightGray, Color.Black, emptySpotGradientAngle, false);
                 System.Drawing.Pen normalPen = new System.Drawing.Pen(normalPenBrush, 1.0f);
 
                 System.Drawing.Drawing2D.LinearGradientBrush br;
                 br = new System.Drawing.Drawing2D.LinearGradientBrush(gradientBigRectangle, Color.Black, c, filledSpotGradientAngle, false);
+                System.Drawing.Drawing2D.LinearGradientBrush br2;
+                br2 = new System.Drawing.Drawing2D.LinearGradientBrush(gradientBigRectangle, Color.LightGray, c, emptySpotGradientAngle, false);
+                System.Drawing.Drawing2D.LinearGradientBrush br3;
+                br3 = new System.Drawing.Drawing2D.LinearGradientBrush(gradientBigRectangle, Color.White, c, anotherGradientAngle, false);
 
                 Point[] triangle = DrawTriangle(spotRectangle, direction);
-                e.Graphics.FillPolygon(br, triangle);
+                Point[][] pyramid = DrawPyramid(spotRectangle, direction);
+                e.Graphics.FillPolygon(br, pyramid[0]);
+                e.Graphics.FillPolygon(br2, pyramid[1]);
+                e.Graphics.FillPolygon(br3, pyramid[2]);
                 e.Graphics.DrawPolygon(normalPen, triangle);
                 e.PaintContent(e.ClipBounds);
                 e.Handled = true;
